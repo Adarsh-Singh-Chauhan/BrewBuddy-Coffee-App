@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrewBuddy | Your Personal Coffee Companion</title>
+    <meta name="description" content="BrewBuddy helps you find the perfect coffee, track your brews, and join a community of coffee lovers.">
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 1. Top Navigation -->
+    <header class="navbar">
+        <div class="container">
+            <a href="#" class="logo">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+                <span>BrewBuddy</span>
+            </a>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How it works</a>
+                <a href="#bhopal-cafes">Bhopal Cafes</a>
+                <a href="#reviews">Reviews</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#faq">FAQ</a>
+                <a href="#login" class="btn btn-primary" id="nav-login-btn" onclick="if(window.openLoginGlobal) window.openLoginGlobal(event);">Log In</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- 2. Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Perfect Coffee, <span class="text-accent">Every Single Time.</span></h1>
+                    <p>BrewBuddy uses AI to match your taste profile with the world's best beans. Track your brews, discover local roasters, and master your technique.</p>
+                    <div class="hero-actions">
+                        <a href="#login" class="btn btn-primary btn-lg" id="hero-login-btn" onclick="if(window.openLoginGlobal) window.openLoginGlobal(event);">Create Free Account</a>
+                        <a href="#waitlist" class="btn btn-outline btn-lg">Join the Waitlist</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="placeholder-phone">
+                        <div class="screen-content">
+                            <div class="mock-app-header"></div>
+                            <div class="mock-app-card"></div>
+                            <div class="mock-app-card"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Social Proof -->
+        <section class="social-proof">
+            <div class="container">
+                <div class="ratings">
+                    <div class="stars">★★★★★</div>
+                    <p>4.9/5 from 10k+ coffee lovers</p>
+                </div>
+                <div class="press-logos">
+                    <div class="press-logo">CoffeeDaily</div>
+                    <div class="press-logo">TechBrew</div>
+                    <div class="press-logo">BeanMagazine</div>
+                    <div class="press-logo">TheDailyGrind</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Features -->
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title">Brew Smarter, Not Harder</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">☕</div>
+                        <h3>Smart Brewing</h3>
+                        <p>Guided timers and ratios for every method from V60 to Aeropress.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔍</div>
+                        <h3>Bean Finder</h3>
+                        <p>Personalized recommendations based on your unique flavor profile.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Brew Journal</h3>
+                        <p>Log every cup, rate the beans, and track your palate's evolution.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌍</div>
+                        <h3>Roaster Map</h3>
+                        <p>Discover and support independent local roasters near you.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. How it Works -->
+        <section id="how-it-works" class="how-it-works">
+            <div class="container">
+                <h2 class="section-title">How It Works</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Take the Quiz</h3>
+                        <p>Tell us your taste preferences in a 30-second interactive flavor quiz.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Get Matched</h3>
+                        <p>Our algorithm finds the perfect beans from sustainable roasters.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Brew & Rate</h3>
+                        <p>Follow our guided recipes and rate your brew to refine your profile.</p>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 3rem;">
+                    <button id="start-quiz-btn" class="btn btn-primary btn-lg" style="box-shadow: 0 0 20px rgba(207,168,116,0.3);">Take the Interactive Quiz Now</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Coffee Finder Demo -->
+        <section class="coffee-finder">
+            <div class="container">
+                <h2 class="section-title">Find Your Perfect Roast</h2>
+                <div class="finder-demo">
+                    <div class="filter-group">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="light">Light</button>
+                        <button class="filter-btn" data-filter="medium">Medium</button>
+                        <button class="filter-btn" data-filter="dark">Dark</button>
+                    </div>
+                    <div class="coffee-grid" id="coffee-grid">
+                        <!-- Items injected by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6.5 Bhopal Cafes Integration -->
+        <section id="bhopal-cafes" class="bhopal-cafes dynamic-section">
+            <div class="container">
+                <h2 class="section-title">Discover <span class="text-accent">Bhopal's Best Cafes</span></h2>
+                <div class="bhopal-grid">
+                    <!-- Cafe List -->
+                    <div class="cafe-list" id="bhopal-cafe-list">
+                        <!-- Populated by JS -->
+                    </div>
+                    
+                    <!-- Detail View (Map, Menu, Ride) -->
+                    <div class="cafe-details-pane" id="cafe-details-pane">
+                        <div class="map-container">
+                            <iframe id="cafe-map-iframe" src="" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                        <div class="cafe-info-card">
+                            <div class="cafe-header-row">
+                                <h3 id="detail-cafe-name">Select a Cafe</h3>
+                                <a id="detail-directions-btn" href="#" target="_blank" class="btn btn-primary btn-sm" style="display:none;">🗺️ Get Directions</a>
+                            </div>
+                            <div id="detail-cafe-tags" class="cafe-tags mt-1"></div>
+                            <p id="detail-cafe-desc" class="text-muted mt-2">Choose a cafe from the list to see the menu and book a ride.</p>
+                            
+                            <div class="cafe-menu-box mt-3" id="cafe-menu-box" style="display:none;">
+                                <h4>Menu & Prices</h4>
+                                <ul id="cafe-menu-list" class="menu-list">
+                                    <!-- Populated by JS -->
+                                </ul>
+                            </div>
+                            
+                            <div class="ride-options mt-4" id="ride-options" style="display:none;">
+                                <h4><span class="live-indicator"></span> Book a Live Ride</h4>
+                                <div class="ride-buttons">
+                                    <button class="ride-btn uber" data-service="Uber">
+                                        🚗 Uber
+                                        <div class="est-price" id="est-uber"></div>
+                                    </button>
+                                    <button class="ride-btn ola" data-service="Ola">
+                                        🚕 Ola
+                                        <div class="est-price" id="est-ola"></div>
+                                    </button>
+                                    <button class="ride-btn rapido" data-service="Rapido">
+                                        🏍️ Rapido
+                                        <div class="est-price" id="est-rapido"></div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Reviews -->
+        <section id="reviews" class="reviews" style="background-color: var(--espresso-brown);">
+            <div class="container">
+                <h2 class="section-title text-center" style="color: var(--text-dark);">Loved by <span class="text-accent">Baristas & Filter Coffee Fans</span></h2>
+                <div class="testimonial-grid mt-4" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                    <div class="testimonial glass-panel" style="padding: 2rem; border-radius: 1rem;">
+                        <p style="color: var(--text-dark); font-size: 1.1rem; margin-bottom: 1.5rem;">"The brewing timers are a game changer for my morning South Indian Filter coffee routine."</p>
+                        <cite style="color: var(--accent-green); font-style: normal; font-weight: 600;">— Priya S., Home Enthusiast</cite>
+                    </div>
+                    <div class="testimonial glass-panel" style="padding: 2rem; border-radius: 1rem;">
+                        <p style="color: var(--text-dark); font-size: 1.1rem; margin-bottom: 1.5rem;">"Finally an app that understands Indian specialty coffee nuances from Chikmagalur estates."</p>
+                        <cite style="color: var(--accent-green); font-style: normal; font-weight: 600;">— Rahul M., Professional Barista</cite>
+                    </div>
+                    <div class="testimonial glass-panel" style="padding: 2rem; border-radius: 1rem;">
+                        <p style="color: var(--text-dark); font-size: 1.1rem; margin-bottom: 1.5rem;">"I've discovered so many amazing local roasters in Bhopal through BrewBuddy."</p>
+                        <cite style="color: var(--accent-green); font-style: normal; font-weight: 600;">— Anjali R., Coffee Explorer</cite>
+                    </div>
+                    <div class="testimonial glass-panel" style="padding: 2rem; border-radius: 1rem;">
+                        <p style="color: var(--text-dark); font-size: 1.1rem; margin-bottom: 1.5rem;">"The UI is beautiful and so easy to use. My absolute favorite app!"</p>
+                        <cite style="color: var(--accent-green); font-style: normal; font-weight: 600;">— Vikram L., UI Designer</cite>
+                    </div>
+                    <div class="testimonial glass-panel" style="padding: 2rem; border-radius: 1rem;">
+                        <p style="color: var(--text-dark); font-size: 1.1rem; margin-bottom: 1.5rem;">"My V60 technique has improved significantly since using their step-by-step guides."</p>
+                        <cite style="color: var(--accent-green); font-style: normal; font-weight: 600;">— Siddharth H., Hobbyist</cite>
+                    </div>
+                    <div class="testimonial glass-panel" style="padding: 2rem; border-radius: 1rem;">
+                        <p style="color: var(--text-dark); font-size: 1.1rem; margin-bottom: 1.5rem;">"The bean matching algorithm recommending Indian Kaapi is surprisingly accurate."</p>
+                        <cite style="color: var(--accent-green); font-style: normal; font-weight: 600;">— Neha P., Daily Drinker</cite>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Pricing -->
+        <section id="pricing" class="pricing">
+            <div class="container">
+                <h2 class="section-title text-center" style="color: var(--text-dark);">Simple <span class="text-accent">Pricing</span></h2>
+                <div class="pricing-table" style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 3rem;">
+                    <div class="pricing-card glass-panel" style="padding: 3rem 2rem; border-radius: 1.5rem; flex: 1; min-width: 300px; max-width: 400px; text-align: left;">
+                        <h3 style="color: var(--accent-green); font-size: 1.5rem;">Free Basics</h3>
+                        <div class="price" style="font-size: 3rem; font-weight: 700; color: var(--text-dark); margin: 1rem 0;">₹0</div>
+                        <ul style="color: var(--text-dark); display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 2rem;">
+                            <li>✔️ Basic Brewing Guides</li>
+                            <li>✔️ Limited Brew Journal</li>
+                            <li>✔️ Roaster Map</li>
+                        </ul>
+                        <a href="#" class="btn btn-outline" style="width: 100%; text-align: center; display: block;">Get Started</a>
+                    </div>
+                    <div class="pricing-card glass-panel featured" style="padding: 3rem 2rem; border-radius: 1.5rem; flex: 1; min-width: 300px; max-width: 400px; border: 2px solid var(--accent-green); transform: scale(1.05); text-align: left; position: relative;">
+                        <div class="badge" style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--accent-green); color: var(--espresso-brown); padding: 0.3rem 1rem; border-radius: 20px; font-weight: 700; font-size: 0.85rem;">Most Popular</div>
+                        <h3 style="color: var(--accent-green); font-size: 1.5rem;">Pro Enthusiast</h3>
+                        <div class="price" style="font-size: 3rem; font-weight: 700; color: var(--text-dark); margin: 1rem 0;">₹99<span class="text-sm" style="font-size: 1rem; color: var(--text-muted);">/mo</span></div>
+                        <ul style="color: var(--text-dark); display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 2rem;">
+                            <li>✔️ Advanced AI Matching</li>
+                            <li>✔️ Unlimited Brew Journal</li>
+                            <li>✔️ Custom Brew Profiles</li>
+                            <li>✔️ Offline Access</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary" style="width: 100%; text-align: center; display: block;">Go Pro</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. FAQ -->
+        <section id="faq" class="faq">
+            <div class="container">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false" aria-controls="faq1">
+                            Is BrewBuddy available on Android?
+                            <span class="icon">+</span>
+                        </button>
+                        <div id="faq1" class="accordion-content" hidden>
+                            <p>Yes, BrewBuddy is available for both iOS and Android devices on their respective app stores.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false" aria-controls="faq2">
+                            Can I use it for tea brewing?
+                            <span class="icon">+</span>
+                        </button>
+                        <div id="faq2" class="accordion-content" hidden>
+                            <p>While we focus on coffee, many of our timers and journaling features can be adapted for tea brewing as well.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false" aria-controls="faq3">
+                            Do you sell coffee directly?
+                            <span class="icon">+</span>
+                        </button>
+                        <div id="faq3" class="accordion-content" hidden>
+                            <p>We don't sell coffee ourselves, but we partner with roasters to provide direct links to purchase their beans.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 10. Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <a href="#" class="logo">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+                        <span>BrewBuddy</span>
+                    </a>
+                    <p>Elevating your daily coffee ritual through technology and community.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Links</h4>
+                    <a href="#features">Features</a>
+                    <a href="#how-it-works">How it works</a>
+                    <a href="#pricing">Pricing</a>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Stay Caffeinated</h4>
+                    <p>Get the latest coffee tips and app updates.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email" required>
+                        <button type="submit" class="btn btn-primary">Join</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 BrewBuddy Inc. All rights reserved.</p>
+                <div class="socials">
+                    <a href="#" aria-label="Instagram">IG</a>
+                    <a href="#" aria-label="Twitter">TW</a>
+                    <a href="#" aria-label="Facebook">FB</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 11. Interactive Modals -->
+    <!-- Login & Authentication Modal -->
+    <div id="login-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content glass-panel" style="max-width: 450px; text-align: center; padding: 3rem 2rem;">
+            <button class="close-modal text-accent" id="close-login-modal">&times;</button>
+            <h2 class="section-title text-accent mb-2" style="font-size: 2rem;">Welcome Back</h2>
+            <p class="text-muted mb-4">Enter your details to sync your coffee profile.</p>
+            
+            <form id="auth-form" style="display: flex; flex-direction: column; gap: 1.2rem;">
+                <div style="display: flex; gap: 1rem; margin-bottom: 0.5rem; padding-bottom: 0.5rem;">
+                    <span style="flex:1; cursor:pointer; color:var(--accent-green); font-weight:bold; border-bottom: 2px solid var(--accent-green);">Phone (OTP)</span>
+                    <span style="flex:1; cursor:pointer; color:var(--text-muted); border-bottom: 1px solid rgba(255,255,255,0.1);">Email / Password</span>
+                </div>
+                <input type="tel" id="auth-contact" placeholder="+91 Enter your Mobile Number" required style="padding: 1rem; border-radius: 0.8rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(207,168,116,0.5); color: var(--text-dark); font-size: 1rem;">
+                <div id="otp-section" style="display:none; flex-direction: column; gap: 1.2rem;">
+                    <input type="text" id="auth-otp" placeholder="Enter 6-digit OTP" style="padding: 1rem; border-radius: 0.8rem; background: rgba(255,255,255,0.05); border: 1px solid var(--accent-green); color: var(--text-dark); font-size: 1.2rem; text-align:center; letter-spacing: 5px;">
+                </div>
+                <button type="button" id="auth-step-btn" class="btn btn-primary btn-lg mt-2">Get OTP</button>
+            </form>
+            <div id="auth-user-dashboard" style="display:none; text-align: center;">
+                <h3 style="color:var(--text-dark); margin-bottom:1rem;">You are securely logged in.</h3>
+                <p style="color:var(--text-muted); margin-bottom:1.5rem;">Your data, saved cafe layouts, and taste profiles are safely synced with our database.</p>
+                <button type="button" id="logout-btn" class="btn btn-outline">Log Out</button>
+            </div>
+            <p id="auth-status" style="margin-top: 1rem; color: var(--accent-green); display: none;">Sending OTP securely...</p>
+        </div>
+    </div>
+    <!-- Roast Details Modal -->
+    <div id="roast-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content glass-panel" style="max-width: 900px;">
+            <button class="close-modal text-accent" id="close-roast-modal">&times;</button>
+            <div class="modal-body" id="roast-modal-body">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Modal -->
+    <div id="quiz-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content glass-panel" style="max-width: 600px; text-align: center;">
+            <button class="close-modal text-accent" id="close-quiz-modal">&times;</button>
+            <div class="quiz-container" id="quiz-container">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Chatbot UI -->
+    <div id="ai-chatbot-icon" onclick="if(window.toggleChatbotGlobal) window.toggleChatbotGlobal(event);" style="position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: linear-gradient(135deg, var(--accent-green), #d4af37); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #14100e; cursor: pointer; box-shadow: 0 8px 32px rgba(207,168,116,0.3); z-index: 1000; transition: transform 0.3s ease;">
+        🤖
+    </div>
+
+    <div id="ai-chatbot-window" class="glass-panel" style="position: fixed; bottom: 100px; right: 30px; width: 350px; height: 500px; display: none; flex-direction: column; z-index: 1000; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.5);">
+        <div style="padding: 1rem 1.5rem; background: rgba(20,16,14,0.9); border-bottom: 1px solid rgba(207,168,116,0.2); display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <h3 style="color: var(--text-dark); margin: 0; font-size: 1.1rem;">BrewBot <span class="text-accent">AI</span></h3>
+                <span style="font-size: 0.7rem; color: var(--accent-green);">Powered by Gemini + Claude + ChatGPT</span>
+            </div>
+            <button id="close-chatbot" onclick="if(window.closeChatbotGlobal) window.closeChatbotGlobal(event);" style="background: none; border: none; color: var(--text-dark); font-size: 1.5rem; cursor: pointer;">&times;</button>
+        </div>
+        <div id="ai-chat-messages" style="flex: 1; padding: 1.5rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem; scroll-behavior: smooth;">
+            <div style="background: rgba(207,168,116,0.1); color: var(--text-dark); padding: 1rem; border-radius: 1rem 1rem 1rem 0; align-self: flex-start; max-width: 85%;">
+                Namaste! I am BrewBot, the ultimate AI Coffee Assistant. Ask me anything about Bhopal Cafes, Indian Coffee Heritage, or any general queries you have! ☕
+            </div>
+        </div>
+        <div style="padding: 1rem; background: rgba(20,16,14,0.8); border-top: 1px solid rgba(207,168,116,0.2); display: flex; gap: 0.5rem;">
+            <input type="text" id="ai-chat-input" placeholder="Ask BrewBot anything..." autocomplete="off" style="flex: 1; padding: 0.8rem 1rem; border-radius: 20px; background: rgba(255,255,255,0.05); border: 1px solid rgba(207,168,116,0.3); color: var(--text-dark); outline: none;">
+            <button id="ai-chat-send" style="background: var(--accent-green); color: var(--espresso-brown); border: none; border-radius: 50%; width: 45px; height: 45px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                ➤
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
