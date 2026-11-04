@@ -1,0 +1,19 @@
+{
+  "name": "brewbuddy-coffee-companion",
+  "version": "2.0.0",
+  "private": true,
+  "description": "BrewBuddy coffee discovery, brew education and local cafe companion",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "check": "node --check server.js && node --check script.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}
