@@ -623,121 +623,138 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    // 8. Authentication & Login Modal Logic (OTP simulation)
-    const navLoginBtn = document.getElementById('nav-login-btn');
-    const heroLoginBtn = document.getElementById('hero-login-btn');
-    const loginModal = document.getElementById('login-modal');
-    const closeLoginBtn = document.getElementById('close-login-modal');
-    
-    // Auth elements
-    const authForm = document.getElementById('auth-form');
-    const authContact = document.getElementById('auth-contact');
-    const otpSection = document.getElementById('otp-section');
-    const authOtp = document.getElementById('auth-otp');
-    const authStepBtn = document.getElementById('auth-step-btn');
-    const authStatus = document.getElementById('auth-status');
-    const authDashboard = document.getElementById('auth-user-dashboard');
-    const logoutBtn = document.getElementById('logout-btn');
+    // 8. Local demo profile. This is not production authentication.
+    const navLoginBtn = document.getElementById("nav-login-btn");
+    const loginModal = document.getElementById("login-modal");
+    const closeLoginBtn = document.getElementById("close-login-modal");
+    const authForm = document.getElementById("auth-form");
+    const authDashboard = document.getElementById("auth-user-dashboard");
+    const authStatus = document.getElementById("auth-status");
+    const logoutBtn = document.getElementById("logout-btn");
+    const demoLoginBtn = document.getElementById("demo-login-btn");
+    const DEMO_EMAIL = "demo@brewbuddy.app";
+    const DEMO_PASSWORD = "BrewBuddy2026!";
 
-    let currentAuthStep = 'phone'; // 'phone' -> 'otp'
-
-    // Check if previously logged in
+    function getDemoUser() {
+        try { return JSON.parse(localStorage.getItem("brewBuddyUser") || "null"); }
+        catch (_) { return null; }
+    }
     function checkLoginState() {
-        let user = null;
-        try {
-            user = localStorage.getItem('brewBuddyUser');
-        } catch(e) {
-            console.warn("localStorage not available", e);
+        const user = getDemoUser();
+        if (navLoginBtn) navLoginBtn.textContent = user ? "My profile" : "Log in";
+        if (authForm) authForm.style.display = user ? "none" : "flex";
+        if (authDashboard) authDashboard.style.display = user ? "block" : "none";
+        if (authStatus) {
+            authStatus.textContent = user ? `Demo session active · ${user.email}` : "";
+            authStatus.style.display = user ? "block" : "none";
         }
-
-        if(user) {
-            if(navLoginBtn) navLoginBtn.textContent = 'My Profile';
-            if(authForm) authForm.style.display = 'none';
-            if(authDashboard) authDashboard.style.display = 'block';
-            return true;
-        } else {
-            if(navLoginBtn) navLoginBtn.textContent = 'Log In';
-            if(authForm) {
-                authForm.style.display = 'flex';
-                // Safe reset
-                try { authForm.reset(); } catch(e){}
-                if(otpSection) otpSection.style.display = 'none';
-                if(authStepBtn) authStepBtn.textContent = 'Get OTP';
-                currentAuthStep = 'phone';
-            }
-            if(authDashboard) authDashboard.style.display = 'none';
-            return false;
-        }
+        updateWorkspace();
+        return Boolean(user);
     }
-
-    checkLoginState(); // check on boot
-
-    window.openLoginGlobal = function(e) {
-        if(e) e.preventDefault();
+    checkLoginState();
+    window.openLoginGlobal = function(event) {
+        if (event) event.preventDefault();
         checkLoginState();
-        if(loginModal) loginModal.style.display = 'flex';
-        if(authStatus) authStatus.style.display = 'none';
+        if (loginModal) loginModal.style.display = "flex";
     };
-
-    const loginLinks = document.querySelectorAll('a[href="#login"]');
-    loginLinks.forEach(link => {
-        link.addEventListener('click', window.openLoginGlobal);
+    document.querySelectorAll('a[href="#login"]').forEach(link => link.addEventListener("click", window.openLoginGlobal));
+    if (closeLoginBtn) closeLoginBtn.addEventListener("click", () => { loginModal.style.display = "none"; });
+    if (demoLoginBtn) demoLoginBtn.addEventListener("click", () => {
+        const email = document.getElementById("demo-email")?.value.trim().toLowerCase();
+        const password = document.getElementById("demo-password")?.value;
+        if (email !== DEMO_EMAIL || password !== DEMO_PASSWORD) { showToast("Demo credentials do not match. Use the sample credentials shown above."); return; }
+        localStorage.setItem("brewBuddyUser", JSON.stringify({ name: "BrewBuddy Demo Guest", email: DEMO_EMAIL, mode: "local-demo", signedInAt: new Date().toISOString() }));
+        checkLoginState();
+        showToast("Welcome to BrewBuddy demo mode.");
     });
+    if (logoutBtn) logoutBtn.addEventListener("click", () => { localStorage.removeItem("brewBuddyUser"); checkLoginState(); showToast("Demo session ended."); });
+    if (loginModal) loginModal.addEventListener("click", event => { if (event.target === loginModal) loginModal.style.display = "none"; });
 
-    if(closeLoginBtn) {
-        closeLoginBtn.addEventListener('click', () => {
-            loginModal.style.display = 'none';
-        });
+    // 9. Personal workspace and brew journal
+    const journalKey = "brewBuddyJournal";
+    const guideDefinitions = {
+      v60: { title: "V60 Pour Over", time: 180, summary: "A clean, bright cup. Use a medium-fine grind and pour gently in stages.", steps: ["Rinse the paper filter and warm your brewer.", "Add 15 g coffee; bloom with 45 ml water for 30 seconds.", "Pour slowly in circles to reach 250 ml total.", "Let the drawdown finish around 2:45–3:15. Taste and adjust."] },
+      press: { title: "French Press", time: 240, summary: "A full-bodied immersion brew. Keep the grind coarse and press gently.", steps: ["Add 18 g coarse-ground coffee to the warmed carafe.", "Pour 300 ml hot water and stir gently.", "Steep for 4 minutes.", "Break the crust, skim foam and press slowly. Serve immediately."] },
+      moka: { title: "Moka Pot", time: 300, summary: "A concentrated stovetop brew. Use moderate heat and remove it before sputtering.", steps: ["Fill the base with hot water up to the safety valve.", "Fill the basket level with medium-fine coffee; do not tamp.", "Assemble carefully and heat on low to medium.", "Remove from heat when the stream turns pale and starts to sputter."] },
+      aero: { title: "AeroPress", time: 105, summary: "A quick, versatile brew. The recipe is a starting point—experiment with grind and steep.", steps: ["Rinse the filter and assemble your AeroPress.", "Add 15 g medium-fine coffee and 220 ml hot water.", "Stir briefly and steep for about 1:30.", "Press gently over your cup for 20–30 seconds."] }
+    };
+    let timerInterval = null;
+    let timerRemaining = 180;
+    function readJournal() {
+      try { const data = JSON.parse(localStorage.getItem(journalKey) || "[]"); return Array.isArray(data) ? data : []; }
+      catch (_) { return []; }
     }
-
-    if(authStepBtn) {
-        authStepBtn.addEventListener('click', () => {
-            if (currentAuthStep === 'phone') {
-                if(authContact.value.trim().length < 5) return alert("Please enter a valid number or email.");
-                
-                authStatus.textContent = "Sending OTP securely...";
-                authStatus.style.display = 'block';
-                authStepBtn.disabled = true;
-                
-                // Simulate network delay
-                setTimeout(() => {
-                    authStatus.style.display = 'none';
-                    authStepBtn.disabled = false;
-                    otpSection.style.display = 'flex';
-                    authStepBtn.textContent = 'Verify & Login';
-                    currentAuthStep = 'otp';
-                }, 1000);
-            } else if (currentAuthStep === 'otp') {
-                if(authOtp.value.trim().length < 4) return alert("Please enter the OTP.");
-                
-                authStatus.textContent = "Verifying...";
-                authStatus.style.color = "var(--accent-green)";
-                authStatus.style.display = 'block';
-                authStepBtn.disabled = true;
-                
-                setTimeout(() => {
-                    // Save to database/localStorage safely
-                    try {
-                        localStorage.setItem('brewBuddyUser', JSON.stringify({
-                            contact: authContact.value,
-                            timestamp: new Date().toISOString()
-                        }));
-                    } catch(e) { console.warn("Failed to save session", e); }
-                    
-                    authStatus.style.display = 'none';
-                    authStepBtn.disabled = false;
-                    checkLoginState();
-                }, 1200);
-            }
-        });
+    function showToast(message) {
+      const toast = document.getElementById("brewbuddy-toast");
+      if (!toast) return;
+      toast.textContent = message;
+      toast.classList.add("visible");
+      clearTimeout(showToast.timeout);
+      showToast.timeout = setTimeout(() => toast.classList.remove("visible"), 2800);
     }
-    
-    if(logoutBtn) {
-        logoutBtn.addEventListener('click', () => {
-             try { localStorage.removeItem('brewBuddyUser'); } catch(e){}
-             checkLoginState();
-        });
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, character => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", "\"":"&quot;", "'":"&#39;" })[character]);
     }
+    function updateWorkspace() {
+      const journal = readJournal();
+      let favourites = 0;
+      try { favourites = JSON.parse(localStorage.getItem("brewBuddyFavourites") || "[]").length; } catch (_) {}
+      ["stat-brews", "guide-brews"].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = journal.length; });
+      ["stat-favourites", "guide-favs"].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = favourites; });
+      const list = document.getElementById("journal-list");
+      if (!list) return;
+      if (!journal.length) { list.innerHTML = '<div class="journal-empty">No brews yet. Log your first cup to start a personal coffee journal.</div>'; return; }
+      list.innerHTML = journal.slice().reverse().slice(0, 8).map(item => `<article class="journal-entry"><div><strong>${escapeHtml(item.coffee)}</strong><span>${escapeHtml(item.method)} · ${"★".repeat(Number(item.rating) || 0)}${"☆".repeat(5-(Number(item.rating)||0))}</span><p>${escapeHtml(item.notes || "No tasting note added.")}</p></div><time>${new Date(item.createdAt).toLocaleDateString("en-IN",{day:"2-digit",month:"short"})}</time></article>`).join("");
+    }
+    function openJournal() {
+      if (!getDemoUser()) { window.openLoginGlobal(); showToast("Enter demo mode to keep a local brew journal."); return; }
+      document.getElementById("journal-modal").style.display = "flex";
+    }
+    ["journal-add", "journal-add-secondary"].forEach(id => { const button = document.getElementById(id); if (button) button.addEventListener("click", openJournal); });
+    const journalForm = document.getElementById("journal-form");
+    if (journalForm) journalForm.addEventListener("submit", event => {
+      event.preventDefault();
+      if (!getDemoUser()) { showToast("Please enter demo mode first."); return; }
+      const values = new FormData(journalForm);
+      const journal = readJournal();
+      journal.push({ id: (crypto.randomUUID ? crypto.randomUUID() : String(Date.now())), coffee: values.get("coffee"), method: values.get("method"), rating: Number(values.get("rating")), notes: values.get("notes"), createdAt: new Date().toISOString() });
+      localStorage.setItem(journalKey, JSON.stringify(journal));
+      journalForm.reset();
+      document.getElementById("journal-modal").style.display = "none";
+      updateWorkspace();
+      showToast("Brew note saved on this device.");
+    });
+    ["close-journal-modal", "close-guide-modal"].forEach(id => { const button = document.getElementById(id); if (button) button.addEventListener("click", () => { const modal = button.closest(".modal-overlay"); if (modal) modal.style.display = "none"; }); });
+    const workspaceSignin = document.getElementById("workspace-signin");
+    if (workspaceSignin) workspaceSignin.addEventListener("click", window.openLoginGlobal);
+    const workspaceQuiz = document.getElementById("workspace-quiz");
+    if (workspaceQuiz) workspaceQuiz.addEventListener("click", () => { const startQuiz = document.getElementById("start-quiz-btn"); if (startQuiz) startQuiz.click(); else document.getElementById("quiz-modal").style.display = "flex"; });
+    function formatTime(seconds) { return `${String(Math.floor(seconds/60)).padStart(2,"0")}:${String(seconds%60).padStart(2,"0")}`; }
+    function stopTimer() { if (timerInterval) clearInterval(timerInterval); timerInterval = null; }
+    function updateTimerDisplay() { const display = document.getElementById("timer-display"); if (display) display.textContent = formatTime(timerRemaining); }
+    function openGuide(key) {
+      const recipe = guideDefinitions[key]; if (!recipe) return;
+      stopTimer(); timerRemaining = recipe.time; updateTimerDisplay();
+      document.getElementById("guide-title").textContent = recipe.title;
+      document.getElementById("guide-summary").textContent = recipe.summary;
+      document.getElementById("guide-steps").innerHTML = recipe.steps.map((step,index) => `<div class="recipe-step"><span>${String(index+1).padStart(2,"0")}</span><p>${escapeHtml(step)}</p></div>`).join("");
+      document.getElementById("guide-modal").style.display = "flex";
+    }
+    document.querySelectorAll(".guide-open").forEach(button => button.addEventListener("click", () => openGuide(button.dataset.guide)));
+    const timerStart = document.getElementById("timer-start");
+    if (timerStart) timerStart.addEventListener("click", () => {
+      if (timerInterval) { stopTimer(); timerStart.textContent = "Resume timer"; return; }
+      timerStart.textContent = "Pause timer";
+      timerInterval = setInterval(() => { timerRemaining = Math.max(0, timerRemaining-1); updateTimerDisplay(); if (timerRemaining === 0) { stopTimer(); timerStart.textContent = "Start again"; showToast("Your brew timer is complete. Enjoy your coffee."); } }, 1000);
+    });
+    const timerReset = document.getElementById("timer-reset");
+    if (timerReset) timerReset.addEventListener("click", () => {
+      stopTimer();
+      const key = Object.keys(guideDefinitions).find(k => guideDefinitions[k].title === document.getElementById("guide-title").textContent) || "v60";
+      timerRemaining = guideDefinitions[key].time; updateTimerDisplay(); timerStart.textContent = "Start timer";
+    });
+    document.querySelectorAll(".modal-overlay").forEach(modal => modal.addEventListener("click", event => { if (event.target === modal) { modal.style.display = "none"; if (modal.id === "guide-modal") stopTimer(); } }));
+    updateWorkspace();
 
     // 9. AI Chatbot Logic
     const aiChatbotIcon = document.getElementById('ai-chatbot-icon');
