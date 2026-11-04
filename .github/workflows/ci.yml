@@ -1,0 +1,48 @@
+name: BrewBuddy CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Check JavaScript syntax
+        run: npm run check
+
+      - name: Start Express app and smoke-test APIs
+        shell: bash
+        run: |
+          npm start > /tmp/brewbuddy.log 2>&1 &
+          APP_PID=$!
+          trap 'kill $APP_PID 2>/dev/null || true' EXIT
+
+          for attempt in {1..20}; do
+            if curl --silent --fail http://127.0.0.1:3000/api/health > /tmp/health.json; then
+              break
+            fi
+            sleep 1
+          done
+
+          node -e "const h=require('/tmp/health.json'); if(!h.success || h.service!=='BrewBuddy') process.exit(1);"
+          curl --silent --fail http://127.0.0.1:3000/api/cafes > /tmp/cafes.json
+          curl --silent --fail http://127.0.0.1:3000/api/brew-guides > /tmp/guides.json
+          node -e "const c=require('/tmp/cafes.json'); if(!c.success || !Array.isArray(c.data) || !c.data.length) process.exit(1);"
+          node -e "const g=require('/tmp/guides.json'); if(!g.success || g.data.length!==4) process.exit(1);"
+          curl --silent --fail -X POST http://127.0.0.1:3000/api/demo/session -H 'Content-Type: application/json' -d '{"email":"demo@brewbuddy.app","password":"BrewBuddy2026!"}' > /tmp/demo.json
+          node -e "const d=require('/tmp/demo.json'); if(!d.success || d.mode!=='demo') process.exit(1);"
