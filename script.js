@@ -634,6 +634,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const demoLoginBtn = document.getElementById("demo-login-btn");
     const DEMO_EMAIL = "demo@brewbuddy.app";
     const DEMO_PASSWORD = "BrewBuddy2026!";
+    const journalKey = "brewBuddyJournal";
 
     function getDemoUser() {
         try { return JSON.parse(localStorage.getItem("brewBuddyUser") || "null"); }
@@ -671,7 +672,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (loginModal) loginModal.addEventListener("click", event => { if (event.target === loginModal) loginModal.style.display = "none"; });
 
     // 9. Personal workspace and brew journal
-    const journalKey = "brewBuddyJournal";
     const guideDefinitions = {
       v60: { title: "V60 Pour Over", time: 180, summary: "A clean, bright cup. Use a medium-fine grind and pour gently in stages.", steps: ["Rinse the paper filter and warm your brewer.", "Add 15 g coffee; bloom with 45 ml water for 30 seconds.", "Pour slowly in circles to reach 250 ml total.", "Let the drawdown finish around 2:45–3:15. Taste and adjust."] },
       press: { title: "French Press", time: 240, summary: "A full-bodied immersion brew. Keep the grind coarse and press gently.", steps: ["Add 18 g coarse-ground coffee to the warmed carafe.", "Pour 300 ml hot water and stir gently.", "Steep for 4 minutes.", "Break the crust, skim foam and press slowly. Serve immediately."] },
