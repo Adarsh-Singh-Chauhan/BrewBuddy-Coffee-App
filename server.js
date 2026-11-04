@@ -7,7 +7,11 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.json());
+app.use(express.json({ limit: '1mb' }));
+
+app.get('/api/health', (_req, res) => {
+    res.json({ success: true, service: 'BrewBuddy', status: 'ok', mode: 'demo' });
+});
 
 // Database mock
 const bhopalCafes = [
@@ -133,9 +137,40 @@ const bhopalCafes = [
     }
 ];
 
-// API Routes
+// API Routes. Cafe entries below are curated demo content, not a live third-party feed.
 app.get('/api/cafes', (req, res) => {
     res.json({ success: true, data: bhopalCafes });
+});
+
+// Local demo profile endpoint. Production authentication requires a real identity provider.
+app.post('/api/demo/session', (req, res) => {
+    const { email, password } = req.body || {};
+    if (email !== 'demo@brewbuddy.app' || password !== 'BrewBuddy2026!') {
+        return res.status(401).json({ success: false, error: 'Demo credentials are incorrect.' });
+    }
+    return res.json({
+        success: true,
+        mode: 'demo',
+        user: { name: 'BrewBuddy Demo Guest', email: 'demo@brewbuddy.app' },
+        notice: 'This is a demonstration session, not production authentication.'
+    });
+});
+
+// Brew guide reference data is intentionally static and version-controlled.
+app.get('/api/brew-guides', (_req, res) => {
+    res.json({
+        success: true,
+        data: [
+            { id: 'v60', name: 'V60 Pour Over', coffeeGrams: 15, waterMl: 250, brewSeconds: 180 },
+            { id: 'press', name: 'French Press', coffeeGrams: 18, waterMl: 300, brewSeconds: 240 },
+            { id: 'moka', name: 'Moka Pot', coffeeGrams: 20, waterMl: 200, brewSeconds: 300 },
+            { id: 'aero', name: 'AeroPress', coffeeGrams: 15, waterMl: 220, brewSeconds: 105 }
+        ]
+    });
+});
+
+app.use((req, res) => {
+    res.status(404).json({ success: false, error: 'API route not found.' });
 });
 
 // Start Server
