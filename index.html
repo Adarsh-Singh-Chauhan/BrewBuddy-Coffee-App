@@ -302,6 +302,30 @@
                 </div>
             </div>
         </section>
+<!-- BrewBuddy workspace -->
+<section class="bb-workspace section-padding" id="workspace">
+ <div class="container">
+  <div class="workspace-heading"><div><p class="eyebrow">YOUR COFFEE COMPANION</p><h2 class="section-title">A better ritual, one cup at a time.</h2><p class="text-muted">Your personal space for discovering, learning and remembering the coffees you love.</p></div><button class="btn btn-primary" id="workspace-signin">Open my profile</button></div>
+  <div class="workspace-grid">
+   <article class="workspace-card workspace-card-dark"><div class="workspace-card-top"><span class="eyebrow">TODAY'S RITUAL</span><span class="status-dot">GUIDED</span></div><h3>Make room for a slower morning.</h3><p>Pick a brew method and follow a simple recipe with a built-in timer.</p><a href="#brew-guides" class="btn btn-primary">Explore brew guides <span>↗</span></a><div class="workspace-orbit">☕</div></article>
+   <article class="workspace-card"><span class="eyebrow">TASTE PROFILE</span><h3>Know what you love.</h3><p>Three quick choices help match you with a roast style and flavour direction.</p><button class="btn btn-outline" id="workspace-quiz">Take the taste quiz</button></article>
+   <article class="workspace-card"><span class="eyebrow">BREW JOURNAL</span><h3>Keep the good cups close.</h3><p>Save a tasting note, rate a brew and revisit your favourites on this device.</p><button class="btn btn-outline" id="journal-add">Log a coffee</button></article>
+  </div>
+  <div class="workspace-lower"><div><div class="section-kicker">YOUR OVERVIEW</div><h3 class="subsection-title">A little progress goes a long way.</h3></div><div class="workspace-stats"><div class="workspace-stat"><strong id="stat-brews">0</strong><span>Brews logged</span></div><div class="workspace-stat"><strong id="stat-favourites">0</strong><span>Saved favourites</span></div><div class="workspace-stat"><strong id="stat-guides">4</strong><span>Guides to explore</span></div></div></div>
+  <div class="journal-panel"><div class="journal-panel-heading"><div><h3>Recent brew notes</h3><p class="text-muted">Stored in this browser in demo mode.</p></div><button class="btn btn-primary" id="journal-add-secondary">+ Add note</button></div><div id="journal-list" class="journal-list"><div class="journal-empty">No brews yet. Log your first cup to start a personal coffee journal.</div></div></div>
+ </div>
+</section>
+<section class="bb-guides section-padding" id="brew-guides"><div class="container"><div class="guides-intro"><div><p class="eyebrow">BREW WITH CONFIDENCE</p><h2 class="section-title">Good coffee is a little science.<br><em>And a lot of feeling.</em></h2></div><p class="text-muted">Start with a reliable baseline. Adjust grind, ratio and time to suit your beans and taste.</p></div><div class="guide-grid">
+<article class="guide-card"><span class="guide-number">01 / POUR OVER</span><div class="guide-art guide-v60">◉</div><h3>V60 Pour Over</h3><p>Clean, bright and expressive. A good place to explore light and medium roasts.</p><div class="guide-meta"><span>15 g coffee</span><span>250 ml water</span><span>2:45–3:15</span></div><button class="text-link guide-open" data-guide="v60">View recipe ↗</button></article>
+<article class="guide-card"><span class="guide-number">02 / IMMERSION</span><div class="guide-art guide-press">▤</div><h3>French Press</h3><p>Full-bodied and comforting. Let the coffee steep before pressing gently.</p><div class="guide-meta"><span>18 g coffee</span><span>300 ml water</span><span>4:00</span></div><button class="text-link guide-open" data-guide="press">View recipe ↗</button></article>
+<article class="guide-card"><span class="guide-number">03 / STOVETOP</span><div class="guide-art guide-moka">◒</div><h3>Moka Pot</h3><p>Concentrated and bold. Keep the heat moderate for a smoother extraction.</p><div class="guide-meta"><span>20 g coffee</span><span>200 ml water</span><span>4–6 min</span></div><button class="text-link guide-open" data-guide="moka">View recipe ↗</button></article>
+<article class="guide-card"><span class="guide-number">04 / PRESSURE</span><div class="guide-art guide-aero">✳</div><h3>AeroPress</h3><p>Flexible, quick and easy to experiment with. Great for travel and everyday cups.</p><div class="guide-meta"><span>15 g coffee</span><span>220 ml water</span><span>1:30–2:00</span></div><button class="text-link guide-open" data-guide="aero">View recipe ↗</button></article>
+</div></div></section>
+<section class="bb-guidebook section-padding" id="user-guide"><div class="container guidebook-layout"><div><p class="eyebrow">THE BREWBUDDY FIELD GUIDE</p><h2 class="section-title">From first sip<br>to favourite ritual.</h2><p class="text-muted">A simple walkthrough of the app and the decisions behind a better cup.</p><ol class="guide-steps"><li><span>01</span><div><b>Tell us your taste</b><p>Choose bright, balanced or bold to get a starting roast direction.</p></div></li><li><span>02</span><div><b>Explore beans and cafes</b><p>Read roast notes and browse the Bhopal cafe directory.</p></div></li><li><span>03</span><div><b>Brew with a guide</b><p>Use the method cards as a repeatable baseline, then adjust.</p></div></li><li><span>04</span><div><b>Write it down</b><p>Log the bean, method and rating so good cups are easier to repeat.</p></div></li></ol></div><div class="guidebook-preview"><div class="guidebook-window"><div class="window-bar"><i></i><i></i><i></i><span>BREWBUDDY / YOUR SPACE</span></div><div class="window-content"><div class="window-welcome">Good morning,<br><strong>coffee person.</strong></div><div class="window-highlight"><span>YOUR TASTE DIRECTION</span><strong>Balanced & smooth</strong><small>Caramel · cocoa · gentle fruit</small></div><div class="window-mini-grid"><div><span>BREWS</span><b id="guide-brews">0</b></div><div><span>FAVOURITES</span><b id="guide-favs">0</b></div></div><div class="window-line"></div><div class="window-line short"></div></div></div><p class="preview-caption">Illustrative workspace preview · live values update from your demo journal.</p></div></div></section>
+<div id="brewbuddy-toast" class="bb-toast" role="status" aria-live="polite"></div>
+<div id="guide-modal" class="modal-overlay" style="display:none"><div class="modal-content glass-panel bb-dialog"><button class="close-modal" id="close-guide-modal">×</button><p class="eyebrow">BREW METHOD</p><h2 id="guide-title">V60 Pour Over</h2><p id="guide-summary" class="text-muted"></p><div class="recipe-steps" id="guide-steps"></div><div class="timer-row"><div><span class="eyebrow">BREW TIMER</span><strong id="timer-display">03:00</strong></div><button class="btn btn-primary" id="timer-start">Start timer</button><button class="btn btn-outline" id="timer-reset">Reset</button></div></div></div>
+<div id="journal-modal" class="modal-overlay" style="display:none"><div class="modal-content glass-panel bb-dialog"><button class="close-modal" id="close-journal-modal">×</button><p class="eyebrow">BREW JOURNAL</p><h2>Remember this cup.</h2><form id="journal-form" class="journal-form"><label>Coffee or bean<input name="coffee" required maxlength="80" placeholder="e.g. Coorg Peaberry"></label><label>Brew method<select name="method"><option>V60</option><option>French Press</option><option>Moka Pot</option><option>AeroPress</option><option>Espresso</option><option>South Indian Filter</option></select></label><label>Your rating<select name="rating"><option value="5">★★★★★ — Loved it</option><option value="4">★★★★☆ — Very good</option><option value="3">★★★☆☆ — Good</option><option value="2">★★☆☆☆ — Not quite</option><option value="1">★☆☆☆☆ — Try again</option></select></label><label>Tasting note<textarea name="notes" rows="3" maxlength="300" placeholder="Chocolate, citrus, a softer finish…"></textarea></label><button class="btn btn-primary" type="submit">Save brew note</button></form></div></div>
+
     </main>
 
     <!-- 10. Footer -->
@@ -358,7 +382,11 @@
                 <div id="otp-section" style="display:none; flex-direction: column; gap: 1.2rem;">
                     <input type="text" id="auth-otp" placeholder="Enter 6-digit OTP" style="padding: 1rem; border-radius: 0.8rem; background: rgba(255,255,255,0.05); border: 1px solid var(--accent-green); color: var(--text-dark); font-size: 1.2rem; text-align:center; letter-spacing: 5px;">
                 </div>
-                <button type="button" id="auth-step-btn" class="btn btn-primary btn-lg mt-2">Get OTP</button>
+                <div class="demo-access-note"><b>Demo access</b><br>Email: <code>demo@brewbuddy.app</code><br>Password: <code>BrewBuddy2026!</code><br><small>Local-only demonstration profile. No SMS or cloud authentication is connected.</small></div>
+                <label class="demo-field">Email<input id="demo-email" type="email" value="demo@brewbuddy.app" autocomplete="username"></label>
+                <label class="demo-field">Password<input id="demo-password" type="password" value="BrewBuddy2026!" autocomplete="current-password"></label>
+                <button type="button" id="demo-login-btn" class="btn btn-primary btn-lg">Continue in demo mode</button>
+                <button type="button" id="auth-step-btn" class="btn btn-outline" disabled>Phone OTP unavailable in this demo</button>
             </form>
             <div id="auth-user-dashboard" style="display:none; text-align: center;">
                 <h3 style="color:var(--text-dark); margin-bottom:1rem;">You are securely logged in.</h3>
@@ -397,13 +425,13 @@
         <div style="padding: 1rem 1.5rem; background: rgba(20,16,14,0.9); border-bottom: 1px solid rgba(207,168,116,0.2); display: flex; justify-content: space-between; align-items: center;">
             <div>
                 <h3 style="color: var(--text-dark); margin: 0; font-size: 1.1rem;">BrewBot <span class="text-accent">AI</span></h3>
-                <span style="font-size: 0.7rem; color: var(--accent-green);">Powered by Gemini + Claude + ChatGPT</span>
+                <span style="font-size: 0.7rem; color: var(--accent-green);">Coffee guidance · Local demo assistant</span>
             </div>
             <button id="close-chatbot" onclick="if(window.closeChatbotGlobal) window.closeChatbotGlobal(event);" style="background: none; border: none; color: var(--text-dark); font-size: 1.5rem; cursor: pointer;">&times;</button>
         </div>
         <div id="ai-chat-messages" style="flex: 1; padding: 1.5rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem; scroll-behavior: smooth;">
             <div style="background: rgba(207,168,116,0.1); color: var(--text-dark); padding: 1rem; border-radius: 1rem 1rem 1rem 0; align-self: flex-start; max-width: 85%;">
-                Namaste! I am BrewBot, the ultimate AI Coffee Assistant. Ask me anything about Bhopal Cafes, Indian Coffee Heritage, or any general queries you have! ☕
+                Namaste! I’m BrewBot, your coffee guide. Ask about roast styles, brew methods, tasting notes or the Bhopal cafe directory. I use the app’s local knowledge base in demo mode. ☕
             </div>
         </div>
         <div style="padding: 1rem; background: rgba(20,16,14,0.8); border-top: 1px solid rgba(207,168,116,0.2); display: flex; gap: 0.5rem;">
